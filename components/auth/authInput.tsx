@@ -19,7 +19,7 @@ export default function AuthInput({
         placeholder={placeholder}
         {...register(name)}
       />
-      {error && <p className="text-red-40">{error}</p>}
+      {error && <p className="text-red-400">{error}</p>}
     </div>
   );
 }
