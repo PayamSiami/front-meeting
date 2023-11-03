@@ -15,7 +15,7 @@ export default function Search({ searchLength, setSearchResult }: any) {
     if (e.target.value && e.key === "Enter") {
       try {
         const { data } = await axios.get(
-          `${process.env.NEXT_PUBLIC_API_ENDPOINT}/user?search?=${e.target.value}`,
+          `${process.env.NEXT_PUBLIC_API_ENDPOINT}/user?search=${e.target.value}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
