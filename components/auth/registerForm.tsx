@@ -4,16 +4,27 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import AuthInput from "./authInput";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { signUpSchema } from "@/utils/validation";
 import { useDispatch, useSelector } from "react-redux";
-import { getUser, registerUser } from "@/store/features/userSlice";
+import {
+  changeStatus,
+  getAuth,
+  registerUser,
+} from "@/store/features/userSlice";
 import PulseLoader from "react-spinners/PulseLoader";
 import Link from "next/link";
 import Picture from "./picture";
+import axios from "axios";
+import { useRouter } from "next/navigation";
+import { signUpSchema } from "@/utils/validation";
+
+const cloud_name = process.env.NEXT_PUBLIC_CLOUD_NAME;
+const cloud_preset: any = process.env.NEXT_PUBLIC_CLOUD_SECRET;
 
 export default function RegisterForm() {
+  const router = useRouter();
   const dispatch: any = useDispatch();
-  const [picture, setPicture] = useState();
+  const { error, status } = useSelector(getAuth);
+  const [picture, setPicture] = useState("");
   const [readablePicture, setReadablePicture]: any = useState("");
   const {
     register,
@@ -21,14 +32,32 @@ export default function RegisterForm() {
     watch,
     formState: { errors },
   } = useForm({ resolver: yupResolver(signUpSchema) });
+
   const onSubmit = async (data: any) => {
-    let res = await dispatch(registerUser({ ...data, picture: "" }));
-    if (res.payload.user) {
-      console.log("done");
+    dispatch(changeStatus("loading"));
+    if (picture) {
+      await uploadImage().then(async (response) => {
+        let res = await dispatch(
+          registerUser({ ...data, picture: response.secure_url })
+        );
+        if (res?.payload?.user) router.push("login");
+      });
+    } else {
+      let res = await dispatch(registerUser({ ...data, picture: "" }));
+      if (res.payload.user) router.push("login");
     }
   };
 
-  const { error, status } = useSelector(getUser);
+  const uploadImage = async () => {
+    const formData = new FormData();
+    formData.append("upload_preset", cloud_preset);
+    formData.append("file", picture);
+    const { data } = await axios.post(
+      `https://api.cloudinary.com/v1_1/${cloud_name}/image/upload`,
+      formData
+    );
+    return data;
+  };
 
   return (
     <div className="min-h-screen w-full flex items-center justify-center overflow-hidden">

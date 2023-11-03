@@ -17,3 +17,15 @@ export const signUpSchema = Yup.object({
       "Minimum eight characters, at least one letter and one number."
     ),
 });
+
+export const signInSchema = Yup.object({
+  email: Yup.string()
+    .required("Email address is required.")
+    .email("Invalid email address"),
+  password: Yup.string()
+    .required("Password is required!")
+    // .matches(
+    //   /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
+    //   "Minimum eight characters, at least one letter and one number."
+    // ),
+});
