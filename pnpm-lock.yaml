@@ -26,6 +26,9 @@ dependencies:
   axios:
     specifier: ^1.6.0
     version: 1.6.0
+  emoji-picker-react:
+    specifier: ^4.5.7
+    version: 4.5.7(react@18.2.0)
   eslint:
     specifier: 8.48.0
     version: 8.48.0
@@ -833,6 +836,15 @@ packages:
 
   /electron-to-chromium@1.4.508:
     resolution: {integrity: sha512-FFa8QKjQK/A5QuFr2167myhMesGrhlOBD+3cYNxO9/S4XzHEXesyTD/1/xF644gC8buFPz3ca6G1LOQD0tZrrg==}
+    dev: false
+
+  /emoji-picker-react@4.5.7(react@18.2.0):
+    resolution: {integrity: sha512-a1vJBY9AXvFkl4nbdBVovhOYdKw8dM0tPDxfvj6GuMvvBpjSg7QgJqs2gU4ZDvRSRQ7edxHVy8qU+Ns1lejQVQ==}
+    engines: {node: '>=10'}
+    peerDependencies:
+      react: '>=16'
+    dependencies:
+      react: 18.2.0
     dev: false
 
   /emoji-regex@9.2.2:

@@ -1,7 +1,7 @@
 import React from "react";
 import Contact from "./contact";
 
-export default function SearchResult({ searchResults }: any) {
+export default function SearchResult({ searchResults, setSearchResults }: any) {
   return (
     <div>
       {/* Heading */}
@@ -13,7 +13,11 @@ export default function SearchResult({ searchResults }: any) {
       <ul>
         {searchResults &&
           searchResults.map((user: any) => (
-            <Contact contact={user} key={user._id} />
+            <Contact
+              contact={user}
+              key={user._id}
+              setSearchResults={setSearchResults}
+            />
           ))}
       </ul>
     </div>

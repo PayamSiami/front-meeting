@@ -37,7 +37,10 @@ export default function Search({ searchLength, setSearchResult }: any) {
         <div className="flex items-center gap-x-2">
           <div className="w-full flex bg-dark_bg_2 rounded-lg pl-2">
             {show || searchLength > 0 ? (
-              <span className="w-8 flex items-center justify-center rotateAnimation">
+              <span
+                className="w-8 flex items-center justify-center rotateAnimation cursor-pointer"
+                onClick={() => setSearchResult([])}
+              >
                 <ReturnIcon className="fill-green-500 w-5" />
               </span>
             ) : (

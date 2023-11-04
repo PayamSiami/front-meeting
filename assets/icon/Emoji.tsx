@@ -1,4 +1,4 @@
-function EmojiIcon({ className }) {
+function EmojiIcon({ className }: any) {
   return (
     <svg
       width="28"
