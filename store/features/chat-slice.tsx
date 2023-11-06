@@ -98,6 +98,23 @@ export const chatSlice = createSlice({
     setActiveConversation: (state, action) => {
       state.activeConversation = action.payload;
     },
+    setUpdateMessages: (state: any, action) => {
+      // update messages
+      let con = state.activeConversation;
+      if (con._id === action.payload.conversation._id) {
+        state.message = [...state.messages, action.payload];
+      }
+      // update conversation
+      let conversation = {
+        ...action.payload.conversation,
+        latesMessage: action.payload,
+      };
+      let newCon = [...state?.conversations].filter(
+        (c) => c._id !== conversation._id
+      );
+      newCon?.unshift(conversation);
+      state.conversation = newCon;
+    },
   },
   initialState,
   extraReducers(builder) {
@@ -173,6 +190,6 @@ export const getMessages = createSelector(
   (chat: any) => chat.messages
 );
 
-export const { setActiveConversation } = chatSlice.actions;
+export const { setActiveConversation, setUpdateMessages } = chatSlice.actions;
 
 export default chatSlice.reducer;

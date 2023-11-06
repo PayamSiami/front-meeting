@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import Header from "./header";
 import Notification from "./notification";
 import Search from "./search";
-import Conversation from "./conversations";
+import Conversations from "./conversations";
 import SearchResult from "./search-result";
 
-export default function Sidebar() {
+export default function Sidebar({ socket }: any) {
   const [searchResults, setSearchResults] = useState([]);
   return (
-    <div className="w-[40%] h-full select-none">
+    <div className="flex0030 max-w-[30%] h-full select-none">
       <Header />
       <Notification />
       <Search
@@ -21,7 +21,7 @@ export default function Sidebar() {
           setSearchResults={setSearchResults}
         />
       ) : (
-        <Conversation />
+        <Conversations socket={socket} />
       )}
     </div>
   );

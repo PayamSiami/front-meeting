@@ -2,7 +2,7 @@ import ChatIcon from "@/assets/icon/Chat";
 import CommunityIcon from "@/assets/icon/Community";
 import DotsIcon from "@/assets/icon/Dots";
 import StoryIcon from "@/assets/icon/Story";
-import { getUser } from "@/store/features/userSlice";
+import { getUser } from "@/store/features/user-slice";
 import Image from "next/image";
 import { useState } from "react";
 import { useSelector } from "react-redux";

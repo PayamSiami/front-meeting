@@ -7,13 +7,15 @@ export default function Emoji({
   textRef,
   message,
   setMessage,
-  showPicker,
-  setShowPicker,
+  open,
+  setOpen,
+  setShowAttachment,
 }: any) {
   const [currentPosition, setCurrentPosition] = useState();
 
   const handleClick = () => {
-    setShowPicker(!showPicker);
+    setShowAttachment(false);
+    setOpen(!open);
   };
 
   useEffect(() => {
@@ -33,7 +35,7 @@ export default function Emoji({
 
   return (
     <li className="w-full">
-      {showPicker ? (
+      {open ? (
         <button className="btn" type="button" onClick={handleClick}>
           <CloseIcon className={"fill-dark_svg_1"} />
         </button>
@@ -43,7 +45,7 @@ export default function Emoji({
         </button>
       )}
       {/* Emoji */}
-      {showPicker ? (
+      {open ? (
         <div className="openEmojiAnimation absolute bottom-[60px] left-[-0.5px] w-full">
           <EmojiPicker theme="dark" onEmojiClick={handleEmoji} />
         </div>

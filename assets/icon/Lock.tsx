@@ -1,6 +1,6 @@
 import React from "react";
 
-function LockIcon({ className }) {
+function LockIcon({ className }: any) {
   return (
     <svg width="24" height="24" viewBox="0 0 28 35">
       <path

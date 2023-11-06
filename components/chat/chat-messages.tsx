@@ -1,12 +1,21 @@
 import { getMessages } from "@/store/features/chat-slice";
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import Message from "./message";
-import { getUser } from "@/store/features/userSlice";
+import { getUser } from "@/store/features/user-slice";
 
-export default function ChatMessage() {
+export default function ChatMessages() {
   const messages = useSelector(getMessages);
   const user = useSelector(getUser);
+  const endRef: any = useRef(null);
+
+  const scrollToBottom = () => {
+    endRef?.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
 
   return (
     <div
@@ -25,6 +34,7 @@ export default function ChatMessage() {
               key={message._id}
             />
           ))}
+        <div ref={endRef} className="mt-2"/>
       </div>
     </div>
   );

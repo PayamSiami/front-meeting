@@ -1,6 +1,6 @@
 // useAuth.js (custom hook)
 
-import { getUser } from "@/store/features/userSlice";
+import { getUser } from "@/store/features/user-slice";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";

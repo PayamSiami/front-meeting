@@ -8,10 +8,10 @@ import {
   sendMessage,
 } from "@/store/features/chat-slice";
 import { useDispatch, useSelector } from "react-redux";
-import { getUser } from "@/store/features/userSlice";
+import { getUser } from "@/store/features/user-slice";
 import { CircleLoader } from "react-spinners";
 
-export default function ChatActions() {
+export default function ChatActions({ socket }): any {
   const [message, setMessage] = useState("");
   const dispatch: any = useDispatch();
   const activeConversation = useSelector(getActiveConversation);
@@ -19,6 +19,7 @@ export default function ChatActions() {
   const { token } = useSelector(getUser);
   const [showPicker, setShowPicker] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [showAttachment, setShowAttachment] = useState(false);
 
   const handleSubmit = async (e: any) => {
     setLoading(true);
@@ -29,8 +30,8 @@ export default function ChatActions() {
       token,
       message: message,
     };
-    await dispatch(sendMessage(values));
-    console.log("data");
+    let newMsg = await dispatch(sendMessage(values));
+    socket?.emit("new_message", newMsg.payload);
     setMessage("");
     setShowPicker(false);
     setLoading(false);
@@ -49,10 +50,15 @@ export default function ChatActions() {
             textRef={textRef}
             message={message}
             setMessage={setMessage}
-            showPicker={showPicker}
+            open={showPicker}
+            setOpen={setShowPicker}
+            setShowAttachment={setShowAttachment}
+          />
+          <Attachment
+            open={showAttachment}
+            setOpen={setShowAttachment}
             setShowPicker={setShowPicker}
           />
-          <Attachment />
         </ul>
         {/* Input */}
         <Input message={message} setMessage={setMessage} textRef={textRef} />

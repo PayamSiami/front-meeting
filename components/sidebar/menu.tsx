@@ -1,12 +1,18 @@
-import { logout } from "@/store/features/userSlice";
+import { logout } from "@/store/features/user-slice";
+import { useRouter } from "next/navigation";
 import React from "react";
 import { useDispatch } from "react-redux";
 
 export default function Menu() {
+  const router = useRouter();
+
   const dispatch = useDispatch();
+
   const handleLogout = () => {
     dispatch(logout());
+    router.push("/login");
   };
+
   return (
     <div className="absolute right-1 z-50 bg-dark_bg_2 text-dark_text_1 shadow-sm w-52">
       <ul>

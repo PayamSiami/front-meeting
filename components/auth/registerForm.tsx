@@ -9,7 +9,7 @@ import {
   changeStatus,
   getAuth,
   registerUser,
-} from "@/store/features/userSlice";
+} from "@/store/features/user-slice";
 import PulseLoader from "react-spinners/PulseLoader";
 import Link from "next/link";
 import Picture from "./picture";

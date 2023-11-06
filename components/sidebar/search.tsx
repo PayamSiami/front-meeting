@@ -1,9 +1,8 @@
 import FilterIcon from "@/assets/icon/FilterIcon";
 import ReturnIcon from "@/assets/icon/Return";
 import SearchIcon from "@/assets/icon/Search";
-import { getUser } from "@/store/features/userSlice";
+import { getUser } from "@/store/features/user-slice";
 import axios from "axios";
-import { error } from "console";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 

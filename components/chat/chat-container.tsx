@@ -1,16 +1,16 @@
 import React, { useEffect } from "react";
 import ChatHeader from "./chat-header";
-import ChatMessage from "./chat-message";
+import ChatMessages from "./chat-messages";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getActiveConversation,
   getConversationMessages,
   getMessages,
 } from "@/store/features/chat-slice";
-import { getUser } from "@/store/features/userSlice";
+import { getUser } from "@/store/features/user-slice";
 import ChatActions from "./chat-actions";
 
-export default function ChatContainer() {
+export default function ChatContainer({ socket }: any) {
   const dispatch: any = useDispatch();
   const activeConversation = useSelector(getActiveConversation);
   const { token } = useSelector(getUser);
@@ -32,9 +32,9 @@ export default function ChatContainer() {
         {/* Chat header */}
         <ChatHeader />
         {/* Chat message */}
-        <ChatMessage />
+        <ChatMessages />
         {/* Chat Actions */}
-        <ChatActions />
+        <ChatActions socket={socket} />
       </div>
     </div>
   );

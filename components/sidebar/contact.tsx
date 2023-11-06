@@ -1,5 +1,5 @@
 import { openCreateConversation } from "@/store/features/chat-slice";
-import { getUser } from "@/store/features/userSlice";
+import { getUser } from "@/store/features/user-slice";
 import Image from "next/image";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";

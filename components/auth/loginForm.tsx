@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import AuthInput from "./authInput";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useDispatch, useSelector } from "react-redux";
-import { getAuth, loginUser } from "@/store/features/userSlice";
+import { getAuth, loginUser } from "@/store/features/user-slice";
 import PulseLoader from "react-spinners/PulseLoader";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
