@@ -1,12 +1,14 @@
-import { getMessages } from "@/store/features/chat-slice";
+
 import React, { useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import Message from "./message";
+import { getMessages } from "@/store/features/chat-slice";
 import { getUser } from "@/store/features/user-slice";
 
 export default function ChatMessages() {
   const messages = useSelector(getMessages);
   const user = useSelector(getUser);
+
   const endRef: any = useRef(null);
 
   const scrollToBottom = () => {

@@ -1,3 +1,4 @@
+import React from "react";
 import {
   CameraIcon,
   ContactIcon,
@@ -5,8 +6,7 @@ import {
   PhotoIcon,
   PollIcon,
   StickerIcon,
-} from "@/assets/icon";
-import React from "react";
+} from "../../../public/icon";
 
 export default function Menu() {
   return (

@@ -1,7 +1,6 @@
-import ArrowIcon from "@/assets/icon/Arrow";
-import CloseIcon from "@/assets/icon/Close";
-import NotificationIcon from "@/assets/icon/Notification";
+
 import React from "react";
+import { ArrowIcon, CloseIcon, NotificationIcon } from "../../../public/icon";
 
 export default function Notifications() {
   return (

@@ -1,10 +1,8 @@
-import {
-  getActiveConversation,
-  getConversation,
-} from "@/store/features/chat-slice";
+
 import React from "react";
 import { useSelector } from "react-redux";
 import Conversation from "./conversation";
+import { getActiveConversation, getConversation } from "@/store/features/chat-slice";
 
 export default function Conversations({ socket }: any) {
   const conversations = useSelector(getConversation);

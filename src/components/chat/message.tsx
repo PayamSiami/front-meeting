@@ -1,5 +1,6 @@
-import StoryIcon from "@/assets/icon/Story";
+
 import React from "react";
+import { StoryIcon } from "../../../public/icon";
 
 export default function Message({ message, me }: any) {
   return (

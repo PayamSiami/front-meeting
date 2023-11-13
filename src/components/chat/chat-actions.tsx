@@ -2,16 +2,17 @@ import React, { useRef, useState } from "react";
 import Emoji from "./emoji";
 import Attachment from "./attachment";
 import Input from "./input";
-import SendIcon from "@/assets/icon/Send";
+
+import { useDispatch, useSelector } from "react-redux";
+
+import { CircleLoader } from "react-spinners";
 import {
   getActiveConversation,
   sendMessage,
 } from "@/store/features/chat-slice";
-import { useDispatch, useSelector } from "react-redux";
 import { getUser } from "@/store/features/user-slice";
-import { CircleLoader } from "react-spinners";
-
-export default function ChatActions({ socket }): any {
+import { SendIcon } from "../../../public/icon";
+export default function ChatActions({ socket }: any) {
   const [message, setMessage] = useState("");
   const dispatch: any = useDispatch();
   const activeConversation = useSelector(getActiveConversation);
@@ -31,7 +32,7 @@ export default function ChatActions({ socket }): any {
       message: message,
     };
     let newMsg = await dispatch(sendMessage(values));
-    socket?.emit("new_message", newMsg.payload);
+    socket.emit("new_message", newMsg);
     setMessage("");
     setShowPicker(false);
     setLoading(false);

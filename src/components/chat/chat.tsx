@@ -1,5 +1,5 @@
-import Logo from "@/assets/icon/Logo";
 import React from "react";
+import { Logo } from "../../../public/icon";
 
 export default function Chat() {
   return (

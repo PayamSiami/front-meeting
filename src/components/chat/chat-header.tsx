@@ -1,9 +1,10 @@
-import DotsIcon from "@/assets/icon/Dots";
-import SearchIcon from "@/assets/icon/Search";
+
+
 import { getActiveConversation } from "@/store/features/chat-slice";
 import Image from "next/image";
 import React from "react";
 import { useSelector } from "react-redux";
+import { DotsIcon, SearchIcon } from "../../../public/icon";
 
 export default function ChatHeader() {
   const { name, picture } = useSelector(getActiveConversation);

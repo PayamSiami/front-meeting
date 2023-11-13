@@ -1,6 +1,6 @@
-import AttachmentIcon from "@/assets/icon/Attachment";
 import React from "react";
 import Menu from "./menu";
+import { AttachmentIcon } from "../../../public/icon";
 
 export default function Attachment({ open, setOpen, setShowPicker }: any) {
   return (

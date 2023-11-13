@@ -1,7 +1,7 @@
-import CloseIcon from "@/assets/icon/Close";
-import EmojiIcon from "@/assets/icon/Emoji";
+
 import EmojiPicker from "emoji-picker-react";
 import React, { useEffect, useState } from "react";
+import { CloseIcon, EmojiIcon } from "../../../public/icon";
 
 export default function Emoji({
   textRef,

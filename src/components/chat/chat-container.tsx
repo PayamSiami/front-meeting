@@ -2,13 +2,9 @@ import React, { useEffect } from "react";
 import ChatHeader from "./chat-header";
 import ChatMessages from "./chat-messages";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getActiveConversation,
-  getConversationMessages,
-  getMessages,
-} from "@/store/features/chat-slice";
-import { getUser } from "@/store/features/user-slice";
 import ChatActions from "./chat-actions";
+import { getActiveConversation, getConversationMessages } from "@/store/features/chat-slice";
+import { getUser } from "@/store/features/user-slice";
 
 export default function ChatContainer({ socket }: any) {
   const dispatch: any = useDispatch();

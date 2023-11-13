@@ -1,7 +1,5 @@
-import {
-  getActiveConversation,
-  openCreateConversation,
-} from "@/store/features/chat-slice";
+
+import { getActiveConversation, openCreateConversation } from "@/store/features/chat-slice";
 import { getUser } from "@/store/features/user-slice";
 import {
   getConversationId,
@@ -22,7 +20,7 @@ export default function Conversation({ socket, con }: any) {
       token: user.token,
     };
     await dispatch(openCreateConversation(values));
-    socket.emit("join_conversation", activeConversation._id);
+    socket?.emit("join_conversation", activeConversation._id);
   };
 
   return (
