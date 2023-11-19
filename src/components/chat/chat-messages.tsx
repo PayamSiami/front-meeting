@@ -1,15 +1,20 @@
-
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import Message from "./message";
-import { getMessages } from "@/store/features/chat-slice";
+import {
+  getActiveConversation,
+  getMessages,
+  getTyping,
+} from "@/store/features/chat-slice";
 import { getUser } from "@/store/features/user-slice";
+import Typing from "./typing";
 
 export default function ChatMessages() {
   const messages = useSelector(getMessages);
   const user = useSelector(getUser);
-
   const endRef: any = useRef(null);
+  const typing = useSelector(getTyping);
+  const activeConversation = useSelector(getActiveConversation);
 
   const scrollToBottom = () => {
     endRef?.current?.scrollIntoView({ behavior: "smooth" });
@@ -36,7 +41,8 @@ export default function ChatMessages() {
               key={message._id}
             />
           ))}
-        <div ref={endRef} className="mt-2"/>
+        <p>{typing === activeConversation._id ? <Typing /> : null}</p>
+        <div ref={endRef} className="mt-2" />
       </div>
     </div>
   );

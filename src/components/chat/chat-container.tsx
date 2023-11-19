@@ -3,13 +3,23 @@ import ChatHeader from "./chat-header";
 import ChatMessages from "./chat-messages";
 import { useDispatch, useSelector } from "react-redux";
 import ChatActions from "./chat-actions";
-import { getActiveConversation, getConversationMessages } from "@/store/features/chat-slice";
+import {
+  getActiveConversation,
+  getConversationMessages,
+  getFiles,
+} from "@/store/features/chat-slice";
 import { getUser } from "@/store/features/user-slice";
+import { getConversationId } from "@/utils/chat";
+import FilePreview from "./file-preview";
 
-export default function ChatContainer({ socket }: any) {
+export default function ChatContainer({ onlineUsers }: any) {
   const dispatch: any = useDispatch();
   const activeConversation = useSelector(getActiveConversation);
-  const { token } = useSelector(getUser);
+  const user = useSelector(getUser);
+  const token = user.token;
+  const files: [] = useSelector(getFiles);
+
+  console.log(files.length);
 
   useEffect(() => {
     const values = {
@@ -26,11 +36,23 @@ export default function ChatContainer({ socket }: any) {
       {/* Container */}
       <div>
         {/* Chat header */}
-        <ChatHeader />
-        {/* Chat message */}
-        <ChatMessages />
-        {/* Chat Actions */}
-        <ChatActions socket={socket} />
+        <ChatHeader
+          online={onlineUsers.find((u: { userId: any }) =>
+            u.userId === getConversationId(user, activeConversation.users)
+              ? true
+              : false
+          )}
+        />
+        {files && files.length > 0 ? (
+          <FilePreview />
+        ) : (
+          <>
+            {/* Chat message */}
+            <ChatMessages />
+            {/* Chat Actions */}
+            <ChatActions />
+          </>
+        )}
       </div>
     </div>
   );

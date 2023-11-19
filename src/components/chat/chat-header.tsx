@@ -1,12 +1,10 @@
-
-
 import { getActiveConversation } from "@/store/features/chat-slice";
 import Image from "next/image";
 import React from "react";
 import { useSelector } from "react-redux";
 import { DotsIcon, SearchIcon } from "../../../public/icon";
 
-export default function ChatHeader() {
+export default function ChatHeader({ online }: any) {
   const { name, picture } = useSelector(getActiveConversation);
   return (
     <div className="h-[59px] bg-dark_bg_2 flex items-center p16 select-none ">
@@ -29,7 +27,9 @@ export default function ChatHeader() {
             <h1 className="text-white text-md font-bold capitalize">
               {name?.split(" ")[0]}
             </h1>
-            <span className="text-xs text-dark_svg_2">online</span>
+            <span className="text-xs text-dark_svg_2">
+              {online ? "online" : ""}
+            </span>
           </div>
         </div>
         {/* Right  */}

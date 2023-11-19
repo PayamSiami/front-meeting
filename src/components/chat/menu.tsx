@@ -7,6 +7,8 @@ import {
   PollIcon,
   StickerIcon,
 } from "../../../public/icon";
+import PhotoAttachment from "./photo-attachment";
+import DocumentAttachment from "./document-attachment";
 
 export default function Menu() {
   return (
@@ -21,11 +23,7 @@ export default function Menu() {
           <ContactIcon />
         </button>
       </li>
-      <li>
-        <button type="button" className="bg-[#5f66cd] rounded-full">
-          <DocumentIcon />
-        </button>
-      </li>
+      <DocumentAttachment />
       <li>
         <button type="button" className="bg-[#d3396d] rounded-full">
           <CameraIcon />
@@ -36,11 +34,7 @@ export default function Menu() {
           <StickerIcon />
         </button>
       </li>
-      <li>
-        <button type="button" className="bg-[#bf59cf] rounded-full">
-          <PhotoIcon />
-        </button>
-      </li>
+      <PhotoAttachment />
     </div>
   );
 }

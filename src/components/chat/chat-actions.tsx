@@ -12,7 +12,10 @@ import {
 } from "@/store/features/chat-slice";
 import { getUser } from "@/store/features/user-slice";
 import { SendIcon } from "../../../public/icon";
-export default function ChatActions({ socket }: any) {
+import { useAppContext } from "@/context";
+export default function ChatActions() {
+  const socket = useAppContext();
+
   const [message, setMessage] = useState("");
   const dispatch: any = useDispatch();
   const activeConversation = useSelector(getActiveConversation);
@@ -32,7 +35,7 @@ export default function ChatActions({ socket }: any) {
       message: message,
     };
     let newMsg = await dispatch(sendMessage(values));
-    socket.emit("new_message", newMsg);
+    socket.emit("new_message", newMsg.payload);
     setMessage("");
     setShowPicker(false);
     setLoading(false);

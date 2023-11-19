@@ -5,13 +5,15 @@ import {
 } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const initialState = {
+const initialState: any = {
   status: "",
   error: "",
   conversations: "",
   activeConversation: null,
   notification: [],
   messages: [],
+  typing: null,
+  files: [],
 };
 
 const CONVERSATION_ENDPOINT = `${process.env.NEXT_PUBLIC_API_ENDPOINT}/conversation`;
@@ -95,21 +97,30 @@ export const sendMessage = createAsyncThunk(
 export const chatSlice = createSlice({
   name: "chat",
   reducers: {
-    setActiveConversation: (state, action) => {
+    activeConversationSet: (state, action) => {
       state.activeConversation = action.payload;
     },
-    setUpdateMessages: (state: any, action) => {
+    typingSet: (state, action) => {
+      state.typing = action.payload;
+    },
+    filesSet: (state, { payload }) => {
+      state.files = [...state.files, payload];
+    },
+    clearFilesSet: (state) => {
+      state.files = [];
+    },
+    setUpdateConversationAndMessages: (state: any, action) => {
       // update messages
       let con = state.activeConversation;
-      if (con._id === action.payload.conversation._id) {
-        state.message = [...state.messages, action.payload];
+      if (con?._id === action.payload.conversation._id) {
+        state.messages = [...state.messages, action.payload];
       }
       // update conversation
       let conversation = {
         ...action.payload.conversation,
         latesMessage: action.payload,
       };
-      let newCon = [...state?.conversations].filter(
+      let newCon = [...state.conversations].filter(
         (c) => c._id !== conversation._id
       );
       newCon?.unshift(conversation);
@@ -146,7 +157,7 @@ export const chatSlice = createSlice({
       })
       .addCase(getConversationMessages.fulfilled, (state, action) => {
         state.status = "succeed";
-        state.messages = action.payload;
+        state.messages = action.payload.reverse();
       })
       .addCase(getConversationMessages.rejected, (state: any, action) => {
         state.status = "failed";
@@ -180,6 +191,11 @@ export const getConversation = createSelector(
   (chat: any) => chat.conversations
 );
 
+export const getFiles = createSelector(
+  (state) => state.chat,
+  (chat: any) => chat.files
+);
+
 export const getActiveConversation = createSelector(
   (state) => state.chat,
   (chat: any) => chat.activeConversation
@@ -190,6 +206,17 @@ export const getMessages = createSelector(
   (chat: any) => chat.messages
 );
 
-export const { setActiveConversation, setUpdateMessages } = chatSlice.actions;
+export const getTyping = createSelector(
+  (state) => state.chat,
+  (chat: any) => chat.typing
+);
+
+export const {
+  activeConversationSet,
+  setUpdateConversationAndMessages,
+  typingSet,
+  filesSet,
+  clearFilesSet,
+} = chatSlice.actions;
 
 export default chatSlice.reducer;
