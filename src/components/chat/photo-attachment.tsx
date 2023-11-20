@@ -29,7 +29,7 @@ function PhotoAttachment() {
           dispatch(
             filesSet({
               file: file,
-              imgData: e.target.result,
+              fileData: e.target.result,
               type: file.type.split("/")[0],
             })
           );
